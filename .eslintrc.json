@@ -34,12 +34,24 @@
         "import/prefer-default-export": "off",
         "class-methods-use-this": "off",
         "no-console": "error",
-        "no-underscore-dangle": ["error", { "allowAfterThis": true }],
-        "no-else-return": ["error", { "allowElseIf": true }],
+        "no-underscore-dangle": [
+          "error",
+          {
+            "allowAfterThis": true
+          }
+        ],
+        "no-else-return": [
+          "error",
+          {
+            "allowElseIf": true
+          }
+        ],
         "@typescript-eslint/no-inferrable-types": "error",
         "@typescript-eslint/no-empty-interface": [
           "error",
-          { "allowSingleExtends": true }
+          {
+            "allowSingleExtends": true
+          }
         ]
       }
     },
@@ -50,5 +62,13 @@
         "@angular-eslint/template/no-negated-async": "error"
       }
     }
+    // {
+    //   "files": [
+    //     "*.ts"
+    //   ],
+    //   "extends": [
+    //     "plugin:@ngrx/store"
+    //   ]
+    // }
   ]
 }
