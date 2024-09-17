@@ -26,11 +26,21 @@
           Platform Launch
         </h1>
         <!--  Drop down-->
-        <img
-          src="assets/images/icon-chevron-down.svg"
-          alt="icon-chevron-down"
-          class="w-[8%] h-1/4 sm:hidden"
-        />
+        @if (toggleSideBar$ | async) {
+          <img
+            src="assets/images/icon-chevron-up.svg"
+            alt="icon-chevron-down"
+            class="w-[8%] h-1/4 sm:hidden"
+            (click)="toggleSideBar()"
+          />
+        } @else {
+          <img
+            src="assets/images/icon-chevron-down.svg"
+            alt="icon-chevron-down"
+            class="w-[8%] h-1/4 sm:hidden"
+            (click)="toggleSideBar()"
+          />
+        }
       </div>
     </div>
     <div class="p-4 flex justify-between items-center gap-2 sm:gap-4 sm:px-8">

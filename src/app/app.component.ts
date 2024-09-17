@@ -1,5 +1,8 @@
 import { isPlatformBrowser } from "@angular/common";
 import { Component, Inject, OnInit, PLATFORM_ID } from "@angular/core";
+import { AppState } from "./models/state/app.state.interface";
+import { Store } from "@ngrx/store";
+import * as UIActions from "../app/store/ui/ui.actions";
 
 @Component({
   selector: "app-root",
@@ -7,7 +10,10 @@ import { Component, Inject, OnInit, PLATFORM_ID } from "@angular/core";
   styleUrl: "./app.component.scss",
 })
 export class AppComponent implements OnInit {
-  constructor(@Inject(PLATFORM_ID) private platformId: object) {}
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: object,
+    private store: Store<AppState>,
+  ) {}
 
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
@@ -47,5 +53,9 @@ export class AppComponent implements OnInit {
         body?.classList.add("dark");
       }
     }
+  }
+
+  toggleSideBar() {
+    this.store.dispatch(UIActions.toggleSideBar());
   }
 }

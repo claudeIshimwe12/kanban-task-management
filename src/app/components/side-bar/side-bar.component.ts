@@ -41,7 +41,7 @@ export class SideBarComponent implements OnInit {
     this.toggle.emit();
   }
 
-  hideTaskBar() {
+  toggleSideBar() {
     this.store.dispatch(UIActions.toggleSideBar());
   }
 }
