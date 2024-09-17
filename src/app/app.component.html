@@ -1,15 +1,4 @@
 <app-nav></app-nav>
 <div class="dark:bg-black-primary min-h-screen">
-  <h1
-    class="text-3xl font-bold text-dark-grey-primary dark:text-white-primary dark:hover:text-white-hover hover:text-dark-grey-hover underline"
-  >
-    Hello world!
-  </h1>
-
-  <button (click)="toggleOff()" class="dark:text-white-primary">
-    Dark Mode On
-  </button>
-  <button (click)="toggleOn()" class="dark:text-white-primary mx-8">
-    Dark Mode Off
-  </button>
+  <app-side-bar (toggle)="toggleTheme()"></app-side-bar>
 </div>
