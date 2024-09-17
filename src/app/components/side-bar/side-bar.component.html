@@ -1,0 +1,71 @@
+<section
+  class="h-full w-full fixed top-16 left-0 p-8 sm:p-0 bg-slate-300/50 backdrop-blur"
+>
+  <div
+    class="bg-white-primary dark:bg-dark-grey-primary z-50 rounded-md sm:rounded-none py-4 sm:w-1/3"
+  >
+    <h1 class="p-4 text-s dark:text-grey-primary">ALL BOARDS (3)</h1>
+
+    <div
+      class="w-full pr-8 sm:flex sm:justify-between sm:flex-col side-bar-height"
+    >
+      <div>
+        <div
+          class="flex justify-start gap-4 bg-purple-primary w-full py-4 px-4 rounded-r-3xl"
+        >
+          <img src="assets/images/icon-board-active.svg" alt="icon-board" />
+          <h1 class="text-white-primary text-m font-bold">Platform Launch</h1>
+        </div>
+        <div class="flex justify-start gap-4 w-full py-4 px-4 rounded-r-3xl">
+          <img src="assets/images/icon-board.svg" alt="icon-board" />
+          <h1 class="text-grey-primary text-m">Marketing Plan</h1>
+        </div>
+        <div class="flex justify-start gap-4 w-full py-4 px-4 rounded-r-3xl">
+          <img src="assets/images/icon-board.svg" alt="icon-board" />
+          <h1 class="text-grey-primary text-m">Road Map</h1>
+        </div>
+
+        <!-- Create a new board-->
+        <div class="flex justify-start gap-4 w-full py-4 px-4 rounded-r-3xl">
+          <img src="assets/images/icon-board-new.svg" alt="icon-board" />
+          <div class="flex items-center gap-2">
+            <img
+              src="assets/images/icon-plus.svg"
+              alt="add icon"
+              class="pt-1"
+            />
+
+            <h1 class="text-purple-primary text-m">Creat New Board</h1>
+          </div>
+        </div>
+      </div>
+      <!--  Theme Togglers-->
+      <div class="ml-4">
+        <div
+          class="bg-grey-hover dark:bg-black-hover mx-auto flex justify-center gap-4 items-center p-4 rounded-md"
+        >
+          <img src="assets/images/icon-light-theme.svg" alt="light icon" />
+
+          <div
+            class="h-6 w-12 bg-purple-primary flex items-center rounded-full"
+            (click)="toggleDarkMode()"
+          >
+            <div
+              class="bg-white-primary rounded-full w-5 h-5 duration-200 ml-1"
+              [ngClass]="{ 'translate-x-full': isDark }"
+            ></div>
+          </div>
+          <img src="assets/images/icon-dark-theme.svg" alt="dark icon" />
+        </div>
+        <!--  Hide Sidebar-->
+        <div class="hidden my-8 sm:flex justify-start items-center gap-2">
+          <img
+            src="assets/images/icon-show-sidebar.svg"
+            alt="icon-show-sidebar"
+          />
+          <h1 class="text-grey-primary">Hide Sidebar</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
