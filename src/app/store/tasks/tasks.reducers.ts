@@ -5,20 +5,26 @@ import { BoardState } from "../../models/state/boards.state.interface";
 export const initialState: BoardState = {
   boards: [],
   loading: false,
+  activeBoard: "",
   error: "",
 };
 
 export const boardsReducer = createReducer(
   initialState,
-  on(BoardActions.loadBoards, (state) => ({ ...state, isLoading: true })),
+  on(BoardActions.loadBoards, (state) => ({ ...state, loading: true })),
   on(BoardActions.loadBoardsSuccess, (state, { boards }) => ({
     ...state,
     boards,
-    isLoading: false,
+    activeBoard: boards[0].name,
+    loading: false,
   })),
   on(BoardActions.loadBoardsFailure, (state, { error }) => ({
     ...state,
     error,
-    isLoading: false,
+    loading: false,
+  })),
+  on(BoardActions.changeBoard, (state, { title }) => ({
+    ...state,
+    activeBoard: title,
   })),
 );

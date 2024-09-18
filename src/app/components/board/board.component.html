@@ -1,0 +1,24 @@
+<div
+  class="flex justify-start gap-4 w-full py-4 px-4 rounded-r-3xl cursor-pointer transition-all ease-linear delay-300"
+  [ngClass]="{
+    'bg-purple-primary': (activeBoard$ | async) === title,
+    'hover:bg-purple-hover': (activeBoard$ | async) === title,
+    'hover:bg-white-hover': (activeBoard$ | async) !== title,
+  }"
+  (click)="handleBoardClick(title)"
+>
+  @if ((activeBoard$ | async) === title) {
+    <img src="assets/images/icon-board-active.svg" alt="icon-board" />
+  } @else {
+    <img src="assets/images/icon-board.svg" alt="icon-board" />
+  }
+  <h1
+    class="text-grey-primary text-m font-bold"
+    [ngClass]="{
+      'text-white-primary': (activeBoard$ | async) === title,
+      'font-bold': (activeBoard$ | async) === title,
+    }"
+  >
+    {{ title }}
+  </h1>
+</div>
