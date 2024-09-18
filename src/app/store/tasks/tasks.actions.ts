@@ -10,3 +10,8 @@ export const loadBoardsFailure = createAction(
   "[App Component] Load Boards Failure",
   props<{ error: string }>(),
 );
+
+export const changeBoard = createAction(
+  "[Side Bar Component] Change Active Board",
+  props<{ title: string }>(),
+);

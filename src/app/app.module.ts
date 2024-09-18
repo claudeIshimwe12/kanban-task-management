@@ -15,9 +15,10 @@ import { UIReducer } from "./store/ui/ui.reducers";
 import { provideHttpClient } from "@angular/common/http";
 import { EffectsModule } from "@ngrx/effects";
 import { BoardsEffects } from "./store/tasks/tasks.effects";
+import { BoardComponent } from "./components/board/board.component";
 
 @NgModule({
-  declarations: [AppComponent, NavComponent, SideBarComponent],
+  declarations: [AppComponent, NavComponent, SideBarComponent, BoardComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
