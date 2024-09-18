@@ -1,11 +1,24 @@
 import { createReducer, on } from "@ngrx/store";
-import { increment, decrement, reset } from "./tasks.actions";
+import * as BoardActions from "./tasks.actions";
+import { BoardState } from "../../models/state/boards.state.interface";
 
-export const initialState = 0;
+export const initialState: BoardState = {
+  boards: [],
+  loading: false,
+  error: "",
+};
 
-export const counterReducer = createReducer(
+export const boardsReducer = createReducer(
   initialState,
-  on(increment, (state): number => state + 1),
-  on(decrement, (state): number => state - 1),
-  on(reset, (): number => 0),
+  on(BoardActions.loadBoards, (state) => ({ ...state, isLoading: true })),
+  on(BoardActions.loadBoardsSuccess, (state, { boards }) => ({
+    ...state,
+    boards,
+    isLoading: false,
+  })),
+  on(BoardActions.loadBoardsFailure, (state, { error }) => ({
+    ...state,
+    error,
+    isLoading: false,
+  })),
 );

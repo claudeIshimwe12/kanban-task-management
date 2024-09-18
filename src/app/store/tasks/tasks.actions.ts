@@ -1,5 +1,12 @@
-import { createAction } from "@ngrx/store";
+import { createAction, props } from "@ngrx/store";
+import { Board } from "../../models/data/board.interface";
 
-export const increment = createAction("[Counter Component] Increment");
-export const decrement = createAction("[Counter Component] Decrement");
-export const reset = createAction("[Counter Component] Reset");
+export const loadBoards = createAction("[App Component] Load Boards");
+export const loadBoardsSuccess = createAction(
+  "[App Component] Load Boards Success",
+  props<{ boards: Board[] }>(),
+);
+export const loadBoardsFailure = createAction(
+  "[App Component] Load Boards Failure",
+  props<{ error: string }>(),
+);
