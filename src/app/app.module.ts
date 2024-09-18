@@ -16,9 +16,18 @@ import { provideHttpClient } from "@angular/common/http";
 import { EffectsModule } from "@ngrx/effects";
 import { BoardsEffects } from "./store/tasks/tasks.effects";
 import { BoardComponent } from "./components/board/board.component";
+import { MainComponent } from "./components/main/main.component";
+import { ColumnComponent } from "./components/column/column.component";
 
 @NgModule({
-  declarations: [AppComponent, NavComponent, SideBarComponent, BoardComponent],
+  declarations: [
+    AppComponent,
+    NavComponent,
+    SideBarComponent,
+    BoardComponent,
+    MainComponent,
+    ColumnComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

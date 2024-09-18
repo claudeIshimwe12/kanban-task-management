@@ -2,7 +2,8 @@ import { Board } from "../data/board.interface";
 
 export interface BoardState {
   boards: Board[];
-  activeBoard: string;
+  activeBoard: Board;
+
   loading: boolean;
   error: string;
 }

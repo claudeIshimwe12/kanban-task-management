@@ -1,0 +1,17 @@
+<section
+  class="fixed top-0 right-0 h-screen bg-grey-hover px-10 py-20 w-full overflow-x-scroll overflow-y-hidden hide-scroll-bar"
+  [ngClass]="{
+    'w-10/12': toggleSideBar$ | async,
+  }"
+>
+  <div *ngIf="activeBoard$ | async as board" class="flex gap-4">
+    @for (column of board.columns; track $index) {
+      <app-column [column]="column"></app-column>
+    }
+    <div
+      class="m-8 min-w-[280px] h-[560px] bg-grey-primary rounded-md flex justify-center items-center"
+    >
+      <h1>+ New Column</h1>
+    </div>
+  </div>
+</section>
