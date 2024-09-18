@@ -3,6 +3,7 @@ import { Component, Inject, OnInit, PLATFORM_ID } from "@angular/core";
 import { AppState } from "./models/state/app.state.interface";
 import { Store } from "@ngrx/store";
 import * as UIActions from "../app/store/ui/ui.actions";
+import * as BoardActions from "../app/store/tasks/tasks.actions";
 
 @Component({
   selector: "app-root",
@@ -16,6 +17,7 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.store.dispatch(BoardActions.loadBoards());
     if (isPlatformBrowser(this.platformId)) {
       const body = document.querySelector("body");
 
