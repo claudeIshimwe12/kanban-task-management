@@ -15,3 +15,12 @@ export const changeBoard = createAction(
   "[Side Bar Component] Change Active Board",
   props<{ title: string }>(),
 );
+export const moveTask = createAction(
+  "[Board] Move Task",
+  props<{
+    previousColumnId: number;
+    currentColumnId: number;
+    previousIndex: number;
+    currentIndex: number;
+  }>(),
+);

@@ -18,7 +18,7 @@ import { BoardsEffects } from "./store/tasks/tasks.effects";
 import { BoardComponent } from "./components/board/board.component";
 import { MainComponent } from "./components/main/main.component";
 import { ColumnComponent } from "./components/column/column.component";
-
+import { DragDropModule } from "@angular/cdk/drag-drop";
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,6 +31,7 @@ import { ColumnComponent } from "./components/column/column.component";
   imports: [
     BrowserModule,
     AppRoutingModule,
+    DragDropModule,
     StoreModule.forRoot({ boards: boardsReducer, ui: UIReducer }),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
