@@ -1,5 +1,6 @@
 import { createAction, props } from "@ngrx/store";
 import { Board } from "../../models/data/board.interface";
+import { Task } from "../../models/data/task.interface";
 
 export const loadBoards = createAction("[App Component] Load Boards");
 export const loadBoardsSuccess = createAction(
@@ -23,4 +24,15 @@ export const moveTask = createAction(
     previousIndex: number;
     currentIndex: number;
   }>(),
+);
+
+export const clickOnTask = createAction(
+  "[Main Component] Click Task",
+  props<{ task: Task }>(),
+);
+
+// Action to complete a subtask
+export const completeSubtask = createAction(
+  "[Main Component] Complete Subtask",
+  props<{ taskTitle: string; subtaskTitle: string }>(),
 );

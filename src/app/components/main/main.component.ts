@@ -3,7 +3,10 @@ import { AppState } from "../../models/state/app.state.interface";
 import { select, Store } from "@ngrx/store";
 import { Observable } from "rxjs";
 import { Board } from "../../models/data/board.interface";
-import { selectSideBarToggler } from "../../store/ui/ui.selectors";
+import {
+  selectModalToggler,
+  selectSideBarToggler,
+} from "../../store/ui/ui.selectors";
 import {
   selectActiveBoard,
   selectLoader,
@@ -21,11 +24,13 @@ export class MainComponent {
   toggleSideBar$!: Observable<boolean>;
   isLoading!: Observable<boolean>;
   activeBoard$: Observable<Board>;
+  toggleModal$!: Observable<boolean>;
 
   constructor(private store: Store<AppState>) {
     this.toggleSideBar$ = this.store.pipe(select(selectSideBarToggler));
     this.isLoading = this.store.pipe(select(selectLoader));
     this.activeBoard$ = this.store.pipe(select(selectActiveBoard));
+    this.toggleModal$ = this.store.pipe(select(selectModalToggler));
   }
 
   drop(event: CdkDragDrop<Task[]>, board: Board) {

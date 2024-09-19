@@ -6,6 +6,7 @@ export const initialState: BoardState = {
   boards: [],
   loading: false,
   activeBoard: { name: "", columns: [] },
+  activeTask: { title: "", description: "", subtasks: [], status: "" },
   error: "",
 };
 
@@ -87,4 +88,56 @@ export const boardsReducer = createReducer(
       };
     },
   ),
+  on(BoardActions.clickOnTask, (state, { task }) => ({
+    ...state,
+    activeTask: task,
+  })),
+  on(BoardActions.completeSubtask, (state, { taskTitle, subtaskTitle }) => {
+    const updatedBoards = state.boards.map((board) => {
+      if (board.name === state.activeBoard.name) {
+        const updatedColumns = board.columns.map((column) => {
+          const updatedTasks = column.tasks.map((task) => {
+            if (task.title === taskTitle) {
+              const updatedSubtasks = task.subtasks.map((subtask) => {
+                if (subtask.title === subtaskTitle) {
+                  return { ...subtask, isCompleted: !subtask.isCompleted };
+                }
+                return subtask;
+              });
+
+              if (state.activeTask && state.activeTask.title === taskTitle) {
+                return { ...task, subtasks: updatedSubtasks };
+              }
+
+              return { ...task, subtasks: updatedSubtasks };
+            }
+            return task;
+          });
+
+          return { ...column, tasks: updatedTasks };
+        });
+
+        return { ...board, columns: updatedColumns };
+      }
+
+      return board;
+    });
+
+    const updatedActiveBoard = updatedBoards.find(
+      (board) => board.name === state.activeBoard.name,
+    );
+
+    const updatedActiveTask =
+      updatedActiveBoard?.columns
+        .flatMap((column) => column.tasks)
+        .find((task) => task.title === state.activeTask?.title) ||
+      state.activeTask;
+
+    return {
+      ...state,
+      boards: updatedBoards,
+      activeBoard: updatedActiveBoard || state.activeBoard,
+      activeTask: updatedActiveTask,
+    };
+  }),
 );

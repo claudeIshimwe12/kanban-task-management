@@ -1,9 +1,11 @@
 import { isPlatformBrowser } from "@angular/common";
 import { Component, Inject, OnInit, PLATFORM_ID } from "@angular/core";
 import { AppState } from "./models/state/app.state.interface";
-import { Store } from "@ngrx/store";
+import { select, Store } from "@ngrx/store";
 import * as UIActions from "../app/store/ui/ui.actions";
 import * as BoardActions from "../app/store/tasks/tasks.actions";
+import { Observable } from "rxjs";
+import { selectModalToggler } from "./store/ui/ui.selectors";
 
 @Component({
   selector: "app-root",
@@ -11,6 +13,7 @@ import * as BoardActions from "../app/store/tasks/tasks.actions";
   styleUrl: "./app.component.scss",
 })
 export class AppComponent implements OnInit {
+  toggleModal$!: Observable<boolean>;
   constructor(
     @Inject(PLATFORM_ID) private platformId: object,
     private store: Store<AppState>,
@@ -18,6 +21,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(BoardActions.loadBoards());
+    this.toggleModal$ = this.store.pipe(select(selectModalToggler));
     if (isPlatformBrowser(this.platformId)) {
       const body = document.querySelector("body");
 
