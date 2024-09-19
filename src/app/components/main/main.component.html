@@ -1,0 +1,29 @@
+<section
+  class="fixed top-0 right-0 h-screen bg-grey-hover dark:bg-black-hover px-10 py-20 w-full overflow-x-scroll overflow-y-hidden hide-scroll-bar"
+  [ngClass]="{
+    'max-w-[83.33%]': toggleSideBar$ | async,
+  }"
+>
+  <div
+    *ngIf="activeBoard$ | async as board"
+    class="flex gap-4"
+    cdkDropListGroup
+  >
+    <!-- Loop through columns -->
+    <app-column
+      *ngFor="let column of board.columns; let i = index"
+      [column]="column"
+      [connectedColumns]="getConnectedLists(board)"
+      (dropTask)="drop($event, board)"
+    ></app-column>
+
+    <div
+      class="m-8 min-w-[280px] h-[560px] bg-grey-primary dark:bg-dark-grey-primary rounded-md flex justify-center items-center"
+    >
+      <div class="flex gap-2">
+        <img src="assets/images/icon-plus.svg" alt="plus icon-plus" />
+        <h1 class="text-grey-primary font-bold">New Column</h1>
+      </div>
+    </div>
+  </div>
+</section>

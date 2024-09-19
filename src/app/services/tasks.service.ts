@@ -7,7 +7,7 @@ import { Board } from "../models/data/board.interface";
   providedIn: "root",
 })
 export class TasksService {
-  url = "asset/data.json";
+  url = "assets/data.json";
   constructor(private http: HttpClient) {}
 
   getData(): Observable<Board[]> {

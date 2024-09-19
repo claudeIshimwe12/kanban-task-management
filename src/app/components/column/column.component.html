@@ -1,0 +1,28 @@
+<div
+  class="min-w-[280px] h-[814px] overflow-y-scroll hide-scroll-bar pb-56"
+  cdkDropList
+  [cdkDropListData]="column.tasks"
+  [cdkDropListConnectedTo]="connectedColumns"
+  (cdkDropListDropped)="drop($event)"
+>
+  <div class="flex items-center gap-4">
+    <div class="h-4 w-4 rounded-full bg-grey-primary"></div>
+    <h1 class="text-grey-primary font-bold">
+      {{ column.name }} ({{ column.tasks.length }})
+    </h1>
+  </div>
+
+  <!-- Cards Wrapper -->
+  <div class="my-4">
+    <div
+      *ngFor="let task of column.tasks; let i = index"
+      class="bg-white-primary dark:bg-dark-grey-primary shadow-md p-4 rounded-md my-4 w-[280px]"
+      cdkDrag
+    >
+      <h1 class="text-black-primary dark:text-white-primary text-m font-bold">
+        {{ task.title }}
+      </h1>
+      <h2 class="text-grey-primary text-m font-bold mt-2">0 of 3 subtasks</h2>
+    </div>
+  </div>
+</div>

@@ -3,15 +3,12 @@
 // <uniquifier>: Use a unique and descriptive class name
 // <weight>: Use a value from 200 to 800
 
-body {
-  @apply bg-white-primary dark:bg-black-primary;
-}
-
 * {
   font-family: "Plus Jakarta Sans", sans-serif;
   font-optical-sizing: auto;
   font-weight: normal;
   font-style: normal;
+  box-sizing: border-box;
 }
 /* You can add global styles to this file, and also import other style files */
 @tailwind base;

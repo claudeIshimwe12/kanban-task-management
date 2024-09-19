@@ -16,12 +16,22 @@ import { provideHttpClient } from "@angular/common/http";
 import { EffectsModule } from "@ngrx/effects";
 import { BoardsEffects } from "./store/tasks/tasks.effects";
 import { BoardComponent } from "./components/board/board.component";
-
+import { MainComponent } from "./components/main/main.component";
+import { ColumnComponent } from "./components/column/column.component";
+import { DragDropModule } from "@angular/cdk/drag-drop";
 @NgModule({
-  declarations: [AppComponent, NavComponent, SideBarComponent, BoardComponent],
+  declarations: [
+    AppComponent,
+    NavComponent,
+    SideBarComponent,
+    BoardComponent,
+    MainComponent,
+    ColumnComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    DragDropModule,
     StoreModule.forRoot({ boards: boardsReducer, ui: UIReducer }),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
