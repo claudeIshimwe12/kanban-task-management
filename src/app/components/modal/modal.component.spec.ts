@@ -1,20 +1,21 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { MainComponent } from "./main.component";
-import { provideMockStore } from "@ngrx/store/testing";
-import { HttpClientTestingModule } from "@angular/common/http/testing";
 
-describe("MainComponent", () => {
-  let component: MainComponent;
-  let fixture: ComponentFixture<MainComponent>;
+import { ModalComponent } from "./modal.component";
+import { HttpClientTestingModule } from "@angular/common/http/testing";
+import { provideMockStore } from "@ngrx/store/testing";
+
+describe("ModalComponent", () => {
+  let component: ModalComponent;
+  let fixture: ComponentFixture<ModalComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [MainComponent],
+      declarations: [ModalComponent],
       imports: [HttpClientTestingModule], // Include HttpClientTestingModule here
       providers: [provideMockStore({})], // provideMockStore is a provider
     }).compileComponents();
 
-    fixture = TestBed.createComponent(MainComponent);
+    fixture = TestBed.createComponent(ModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

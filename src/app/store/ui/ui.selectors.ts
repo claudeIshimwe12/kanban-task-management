@@ -11,7 +11,7 @@ export const selectSideBarToggler = createSelector(
   selectUIState,
   (state) => state.showSideBar,
 );
-// export const selectConfirmDeleteModal = createSelector(
-//   selectUIState,
-//   (state) => state.confirmDeleteModal,
-// );
+export const selectModalToggler = createSelector(
+  selectUIState,
+  (state) => state.showModal,
+);

@@ -1,0 +1,72 @@
+<section
+  class="min-h-screen min-w-full fixed top-0 left-0"
+  *ngIf="task$ | async as task"
+>
+  <div
+    class="bg-black-primary min-h-screen flex justify-center items-center bg-opacity-50 transition-opacity z-20"
+    id="modalOverlay"
+    (click)="toggleModal($event)"
+  >
+    <div
+      class="w-1/3 bg-white-primary dark:bg-dark-grey-hover p-8 rounded-md z-50"
+      id="modalContent"
+      (click)="onClick($event)"
+    >
+      <h1 class="dark:text-white-primary">
+        {{ task.title }}
+      </h1>
+      <h2 class="text-grey-primary my-4">
+        {{ task.description }}
+      </h2>
+      <div>
+        <h3 class="text-white-primary text-s">
+          Subtasks ({{ (task.subtasks | filterTasks: true).length }} of
+          {{ task.subtasks.length }})
+        </h3>
+        <div>
+          @for (subtask of task.subtasks; track $index) {
+            <div
+              class="flex p-4 dark:bg-dark-grey-primary bg-grey-hover my-4 rounded-md gap-2"
+            >
+              <input
+                type="checkbox"
+                class="custom-checkbox"
+                [(ngModel)]="subtask.isCompleted"
+                (change)="onCompleteSubtask(task.title, subtask.title)"
+              />
+              <h1
+                class="text-s font-bold"
+                [ngClass]="{
+                  'text-grey-primary': subtask.isCompleted,
+                  'dark:text-white-primary': !subtask.isCompleted,
+                  'line-through': subtask.isCompleted,
+                }"
+              >
+                {{ subtask.title }}
+              </h1>
+            </div>
+          }
+        </div>
+      </div>
+      <div>
+        <h1 class="text-white-primary text-s">Current Status</h1>
+        <ng-content *ngIf="activeBoard$ | async as activeBoard">
+          <select
+            name="Status"
+            id="Status"
+            class="border-2 dark:border-grey-primary w-full dark:bg-dark-grey-hover dark:text-white-primary font-semibold bg-white-primary p-4 rounded-md my-2"
+            (click)="onChangeTaskStatus($event, task)"
+          >
+            <option
+              *ngFor="let column of activeBoard.columns; let i = index"
+              [value]="column.name"
+              [selected]="column.name === task.status"
+            >
+              {{ column.name }}
+            </option>
+          </select>
+        </ng-content>
+      </div>
+    </div>
+  </div>
+</section>

@@ -16,13 +16,17 @@
   <div class="my-4">
     <div
       *ngFor="let task of column.tasks; let i = index"
-      class="bg-white-primary dark:bg-dark-grey-primary shadow-md p-4 rounded-md my-4 w-[280px]"
+      class="bg-white-primary dark:bg-dark-grey-primary shadow-md p-4 rounded-md my-4 w-[280px] cursor-pointer"
       cdkDrag
+      (click)="onTaskClick(task)"
     >
       <h1 class="text-black-primary dark:text-white-primary text-m font-bold">
         {{ task.title }}
       </h1>
-      <h2 class="text-grey-primary text-m font-bold mt-2">0 of 3 subtasks</h2>
+      <h2 class="text-grey-primary text-m font-bold mt-2">
+        {{ (task.subtasks | filterTasks: true).length }} of
+        {{ task.subtasks.length }} subtasks
+      </h2>
     </div>
   </div>
 </div>

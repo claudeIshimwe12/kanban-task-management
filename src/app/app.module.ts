@@ -1,4 +1,4 @@
-import { NgModule, isDevMode } from "@angular/core";
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule, isDevMode } from "@angular/core";
 import {
   BrowserModule,
   provideClientHydration,
@@ -19,6 +19,9 @@ import { BoardComponent } from "./components/board/board.component";
 import { MainComponent } from "./components/main/main.component";
 import { ColumnComponent } from "./components/column/column.component";
 import { DragDropModule } from "@angular/cdk/drag-drop";
+import { ModalComponent } from "./components/modal/modal.component";
+import { FilterTasksPipe } from "./pipes/filter.pipe";
+import { FormsModule } from "@angular/forms";
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,11 +30,14 @@ import { DragDropModule } from "@angular/cdk/drag-drop";
     BoardComponent,
     MainComponent,
     ColumnComponent,
+    ModalComponent,
+    FilterTasksPipe,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     DragDropModule,
+    FormsModule,
     StoreModule.forRoot({ boards: boardsReducer, ui: UIReducer }),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
@@ -45,5 +51,6 @@ import { DragDropModule } from "@angular/cdk/drag-drop";
   ],
   providers: [provideClientHydration(), provideHttpClient()],
   bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule {}

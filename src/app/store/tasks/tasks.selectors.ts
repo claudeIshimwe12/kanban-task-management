@@ -16,3 +16,8 @@ export const selectLoader = createSelector(
   selectBoardsState,
   (state) => state.loading,
 );
+
+export const selectActiveTask = createSelector(
+  selectBoardsState,
+  (state) => state.activeTask,
+);

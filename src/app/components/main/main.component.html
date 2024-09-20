@@ -17,6 +17,9 @@
       (dropTask)="drop($event, board)"
     ></app-column>
 
+    @if (toggleModal$ | async) {
+      <app-modal></app-modal>
+    }
     <div
       class="m-8 min-w-[280px] h-[560px] bg-grey-primary dark:bg-dark-grey-primary rounded-md flex justify-center items-center"
     >
