@@ -25,10 +25,12 @@
         </h3>
         <div>
           @for (subtask of task.subtasks; track $index) {
-            <div class="flex p-4 bg-dark-grey-primary my-4 rounded-md gap-2">
+            <div
+              class="flex p-4 dark:bg-dark-grey-primary bg-grey-hover my-4 rounded-md gap-2"
+            >
               <input
                 type="checkbox"
-                class="form-checkbox custom-checkbox"
+                class="custom-checkbox"
                 [(ngModel)]="subtask.isCompleted"
                 (change)="onCompleteSubtask(task.title, subtask.title)"
               />
@@ -36,7 +38,7 @@
                 class="text-s font-bold"
                 [ngClass]="{
                   'text-grey-primary': subtask.isCompleted,
-                  'text-white-primary': !subtask.isCompleted,
+                  'dark:text-white-primary': !subtask.isCompleted,
                   'line-through': subtask.isCompleted,
                 }"
               >
@@ -48,13 +50,22 @@
       </div>
       <div>
         <h1 class="text-white-primary text-s">Current Status</h1>
-        <select
-          name="Status"
-          id="Status"
-          class="border-2 dark:border-grey-primary w-full bg-dark-grey-hover p-4 rounded-md my-2"
-        >
-          <option value="Todo">To Do</option>
-        </select>
+        <ng-content *ngIf="activeBoard$ | async as activeBoard">
+          <select
+            name="Status"
+            id="Status"
+            class="border-2 dark:border-grey-primary w-full dark:bg-dark-grey-hover dark:text-white-primary font-semibold bg-white-primary p-4 rounded-md my-2"
+            (click)="onChangeTaskStatus($event, task)"
+          >
+            <option
+              *ngFor="let column of activeBoard.columns; let i = index"
+              [value]="column.name"
+              [selected]="column.name === task.status"
+            >
+              {{ column.name }}
+            </option>
+          </select>
+        </ng-content>
       </div>
     </div>
   </div>

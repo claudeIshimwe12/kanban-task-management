@@ -1,4 +1,4 @@
-import { NgModule, isDevMode } from "@angular/core";
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule, isDevMode } from "@angular/core";
 import {
   BrowserModule,
   provideClientHydration,
@@ -51,5 +51,6 @@ import { FormsModule } from "@angular/forms";
   ],
   providers: [provideClientHydration(), provideHttpClient()],
   bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule {}

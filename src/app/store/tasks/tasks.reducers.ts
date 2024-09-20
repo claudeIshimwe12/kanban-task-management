@@ -140,4 +140,61 @@ export const boardsReducer = createReducer(
       activeTask: updatedActiveTask,
     };
   }),
+  on(BoardActions.changeTaskStatus, (state, { taskStatus, task }) => {
+    const updatedBoards = state.boards.map((board) => {
+      // Check if it's the active board
+      if (board.name === state.activeBoard.name) {
+        // Update columns within the active board
+        const updatedColumns = board.columns.map((column) => {
+          // Check if the task belongs to this column
+          if (column.tasks.some((t) => t.title === task.title)) {
+            // Remove the task from the current column
+            const updatedTasks = column.tasks.filter(
+              (t) => t.title !== task.title,
+            );
+            return { ...column, tasks: updatedTasks };
+          }
+
+          return column;
+        });
+
+        // Find the target column based on taskStatus and add the task to that column
+        const targetColumn = updatedColumns.find(
+          (col) => col.name === taskStatus,
+        );
+        if (targetColumn) {
+          const updatedTargetColumn = {
+            ...targetColumn,
+            tasks: [...targetColumn.tasks, { ...task, status: taskStatus }],
+          };
+
+          const finalUpdatedColumns = updatedColumns.map((col) =>
+            col.name === taskStatus ? updatedTargetColumn : col,
+          );
+
+          return { ...board, columns: finalUpdatedColumns };
+        }
+
+        return { ...board, columns: updatedColumns };
+      }
+
+      return board;
+    });
+
+    const updatedActiveBoard = updatedBoards.find(
+      (board) => board.name === state.activeBoard.name,
+    );
+
+    const updatedActiveTask =
+      updatedActiveBoard?.columns
+        .flatMap((column) => column.tasks)
+        .find((t) => t.title === task.title) || state.activeTask;
+
+    return {
+      ...state,
+      boards: updatedBoards,
+      activeBoard: updatedActiveBoard || state.activeBoard,
+      activeTask: updatedActiveTask,
+    };
+  }),
 );

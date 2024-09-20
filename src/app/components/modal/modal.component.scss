@@ -28,9 +28,6 @@
   animation: modalFadeOut 0.3s forwards;
 }
 
-.dark .custom-checkbox {
-  background-color: black;
-}
 .custom-checkbox {
   appearance: none;
   width: 12px;
@@ -41,7 +38,7 @@
   cursor: pointer;
   transition: border-color 0.2s ease;
   position: relative;
-  background-color: #dfe3fa;
+  background-color: white;
 }
 
 .custom-checkbox:checked {

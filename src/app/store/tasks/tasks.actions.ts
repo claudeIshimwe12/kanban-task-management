@@ -36,3 +36,7 @@ export const completeSubtask = createAction(
   "[Main Component] Complete Subtask",
   props<{ taskTitle: string; subtaskTitle: string }>(),
 );
+export const changeTaskStatus = createAction(
+  "[Main Component] Change Task Status",
+  props<{ taskStatus: string; task: Task }>(),
+);
