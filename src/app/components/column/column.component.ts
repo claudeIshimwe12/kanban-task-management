@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { Column } from "../../models/data/column.interface";
 import { CdkDragDrop } from "@angular/cdk/drag-drop";
 import { Task } from "../../models/data/task.interface";
@@ -12,14 +12,20 @@ import * as BoardActions from "../../store/tasks/tasks.actions";
   templateUrl: "./column.component.html",
   styleUrl: "./column.component.scss",
 })
-export class ColumnComponent {
+export class ColumnComponent implements OnInit {
   @Input({ required: true }) column!: Column;
   @Input() connectedColumns: string[] = [];
   @Output() dropTask = new EventEmitter<CdkDragDrop<Task[]>>();
+  color = "#828FA3";
+  isModalOpen = false;
   constructor(
     private cd: ChangeDetectorRef,
     private store: Store<AppState>,
   ) {}
+
+  ngOnInit(): void {
+    this.color = this.getRandomColor();
+  }
   drop(event: CdkDragDrop<Task[]>) {
     this.dropTask.emit(event);
     this.cd.detectChanges();
@@ -28,5 +34,14 @@ export class ColumnComponent {
   onTaskClick(task: Task) {
     this.store.dispatch(UIActions.toggleModal());
     this.store.dispatch(BoardActions.clickOnTask({ task }));
+  }
+
+  getRandomColor() {
+    const letters = "0123456789ABCDEF";
+    let color = "#";
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
   }
 }

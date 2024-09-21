@@ -142,13 +142,9 @@ export const boardsReducer = createReducer(
   }),
   on(BoardActions.changeTaskStatus, (state, { taskStatus, task }) => {
     const updatedBoards = state.boards.map((board) => {
-      // Check if it's the active board
       if (board.name === state.activeBoard.name) {
-        // Update columns within the active board
         const updatedColumns = board.columns.map((column) => {
-          // Check if the task belongs to this column
           if (column.tasks.some((t) => t.title === task.title)) {
-            // Remove the task from the current column
             const updatedTasks = column.tasks.filter(
               (t) => t.title !== task.title,
             );
@@ -158,7 +154,6 @@ export const boardsReducer = createReducer(
           return column;
         });
 
-        // Find the target column based on taskStatus and add the task to that column
         const targetColumn = updatedColumns.find(
           (col) => col.name === taskStatus,
         );
@@ -195,6 +190,91 @@ export const boardsReducer = createReducer(
       boards: updatedBoards,
       activeBoard: updatedActiveBoard || state.activeBoard,
       activeTask: updatedActiveTask,
+    };
+  }),
+  on(BoardActions.editTask, (state, { title, task }) => {
+    const updatedActiveTask = { ...task };
+
+    const updatedActiveBoard = {
+      ...state.activeBoard,
+      columns: state.activeBoard.columns.map((column) => {
+        if (column.name === state.activeTask.status) {
+          return {
+            ...column,
+            tasks: column.tasks.filter((t) => t.title !== title),
+          };
+        }
+        if (column.name === task.status) {
+          return {
+            ...column,
+            tasks: [...column.tasks, { ...task }],
+          };
+        }
+        return column;
+      }),
+    };
+
+    const updatedBoards = state.boards.map((board) =>
+      board.name === state.activeBoard.name
+        ? {
+            ...board,
+            columns: board.columns.map((column) => {
+              if (column.name === state.activeTask.status) {
+                return {
+                  ...column,
+                  tasks: column.tasks.filter((t) => t.title !== title),
+                };
+              }
+              if (column.name === task.status) {
+                return {
+                  ...column,
+                  tasks: [...column.tasks, { ...task }],
+                };
+              }
+              return column;
+            }),
+          }
+        : board,
+    );
+
+    return {
+      ...state,
+      activeTask: updatedActiveTask,
+      activeBoard: updatedActiveBoard,
+      boards: updatedBoards,
+    };
+  }),
+  on(BoardActions.deleteTask, (state, { title }) => {
+    const updatedActiveBoard = {
+      ...state.activeBoard,
+      columns: state.activeBoard.columns.map((column) => ({
+        ...column,
+        tasks: column.tasks.filter((t) => t.title !== title),
+      })),
+    };
+
+    const updatedBoards = state.boards.map((board) =>
+      board.name === state.activeBoard.name
+        ? {
+            ...board,
+            columns: board.columns.map((column) => ({
+              ...column,
+              tasks: column.tasks.filter((t) => t.title !== title),
+            })),
+          }
+        : board,
+    );
+
+    const updatedActiveTask =
+      state.activeTask.title === title
+        ? { title: "", description: "", status: "", subtasks: [] }
+        : state.activeTask;
+
+    return {
+      ...state,
+      activeTask: updatedActiveTask,
+      activeBoard: updatedActiveBoard,
+      boards: updatedBoards,
     };
   }),
 );

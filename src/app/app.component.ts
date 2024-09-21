@@ -5,7 +5,10 @@ import { select, Store } from "@ngrx/store";
 import * as UIActions from "../app/store/ui/ui.actions";
 import * as BoardActions from "../app/store/tasks/tasks.actions";
 import { Observable } from "rxjs";
-import { selectModalToggler } from "./store/ui/ui.selectors";
+import {
+  selectModalToggler,
+  selectToggleEditModal,
+} from "./store/ui/ui.selectors";
 
 @Component({
   selector: "app-root",
@@ -14,14 +17,22 @@ import { selectModalToggler } from "./store/ui/ui.selectors";
 })
 export class AppComponent implements OnInit {
   toggleModal$!: Observable<boolean>;
+  toggleEditTaskModal$!: Observable<boolean>;
   constructor(
     @Inject(PLATFORM_ID) private platformId: object,
     private store: Store<AppState>,
   ) {}
 
+  isModalOpen = false;
+
+  toggleModal() {
+    this.isModalOpen = !this.isModalOpen;
+  }
+
   ngOnInit(): void {
     this.store.dispatch(BoardActions.loadBoards());
     this.toggleModal$ = this.store.pipe(select(selectModalToggler));
+    this.toggleEditTaskModal$ = this.store.pipe(select(selectToggleEditModal));
     if (isPlatformBrowser(this.platformId)) {
       const body = document.querySelector("body");
 
@@ -62,6 +73,7 @@ export class AppComponent implements OnInit {
   }
 
   toggleSideBar() {
+    this.toggleModal();
     this.store.dispatch(UIActions.toggleSideBar());
   }
 }
