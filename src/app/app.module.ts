@@ -21,7 +21,9 @@ import { ColumnComponent } from "./components/column/column.component";
 import { DragDropModule } from "@angular/cdk/drag-drop";
 import { ModalComponent } from "./components/modal/modal.component";
 import { FilterTasksPipe } from "./pipes/filter.pipe";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { EditTaskComponent } from "./components/edit-task/edit-task.component";
+import { ConfirmDeleteModalComponent } from "./components/confirm-delete-modal/confirm-delete-modal.component";
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,11 +34,14 @@ import { FormsModule } from "@angular/forms";
     ColumnComponent,
     ModalComponent,
     FilterTasksPipe,
+    EditTaskComponent,
+    ConfirmDeleteModalComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     DragDropModule,
+    ReactiveFormsModule,
     FormsModule,
     StoreModule.forRoot({ boards: boardsReducer, ui: UIReducer }),
     StoreDevtoolsModule.instrument({

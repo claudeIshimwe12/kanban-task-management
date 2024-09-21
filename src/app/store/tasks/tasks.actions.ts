@@ -40,3 +40,11 @@ export const changeTaskStatus = createAction(
   "[Main Component] Change Task Status",
   props<{ taskStatus: string; task: Task }>(),
 );
+export const editTask = createAction(
+  "[Edit Task Component] Edit Task",
+  props<{ title: string; task: Task }>(),
+);
+export const deleteTask = createAction(
+  "[Edit Task Component] Delete Task",
+  props<{ title: string }>(),
+);

@@ -2,9 +2,14 @@
 <app-side-bar (toggle)="toggleTheme()"></app-side-bar>
 
 <div
-  class="fixed bottom-4 p-4 rounded-r-full z-10 bg-purple-primary cursor-pointer hover:bg-purple-hover -translate-x-16 sm:translate-x-0"
+  class="fixed bottom-4 p-4 rounded-r-full z-30 bg-purple-primary cursor-pointer hover:bg-purple-hover -translate-x-16 sm:translate-x-0"
   (click)="toggleSideBar()"
 >
   <img src="assets/images/icon-show-sidebar.svg" alt="icon-show-sidebar" />
 </div>
 <app-main></app-main>
+<button (click)="toggleModal()">Open Edit Modal</button>
+@if (toggleEditTaskModal$ | async) {
+  <app-edit-task></app-edit-task>
+}
+<!-- <app-confirm-delete-modal></app-confirm-delete-modal> -->

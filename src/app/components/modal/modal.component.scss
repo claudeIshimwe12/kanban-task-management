@@ -1,37 +1,11 @@
-@keyframes modalFadeIn {
-  0% {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes modalFadeOut {
-  0% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  100% {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-}
-
-.fade-in {
-  animation: modalFadeIn 0.3s forwards;
-}
-
-.fade-out {
-  animation: modalFadeOut 0.3s forwards;
+.custom-height {
+  height: calc(100vh - 100px);
 }
 
 .custom-checkbox {
   appearance: none;
-  width: 12px;
-  height: 12px;
+  width: 14px;
+  height: 14px;
   border: 0.8px solid #dfe3fa;
   border-radius: 2px;
   outline: none;
@@ -55,9 +29,19 @@
   position: absolute;
   top: 2px;
   left: 5px;
-  width: 2px;
+  width: 3px;
   height: 6px;
   border: solid white;
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
+}
+/* Hide scrollbar for WebKit browsers */
+.hide-scroll-bar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for other browsers */
+.hide-scroll-bar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }

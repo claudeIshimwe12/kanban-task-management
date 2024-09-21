@@ -13,6 +13,8 @@ import {
   completeSubtask,
 } from "../../store/tasks/tasks.actions";
 import { Board } from "../../models/data/board.interface";
+import { selectConfirmDeleteToggler } from "../../store/ui/ui.selectors";
+import * as BoardActions from "../../store/tasks/tasks.actions";
 
 @Component({
   selector: "app-modal",
@@ -22,16 +24,22 @@ import { Board } from "../../models/data/board.interface";
 export class ModalComponent {
   task$!: Observable<Task>;
   activeBoard$!: Observable<Board>;
+  toggleConfirmDelete$!: Observable<boolean>;
   constructor(private store: Store<AppState>) {
     this.task$ = this.store.pipe(select(selectActiveTask));
     this.activeBoard$ = this.store.pipe(select(selectActiveBoard));
+    this.toggleConfirmDelete$ = this.store.pipe(
+      select(selectConfirmDeleteToggler),
+    );
   }
   toggleModal(event: MouseEvent) {
-    this.store.dispatch(UIActions.toggleModal());
     event.stopPropagation();
+    this.store.dispatch(UIActions.toggleModal());
+    this.store.dispatch(UIActions.toggleConfirmDeleteOff());
   }
   onClick(event: MouseEvent) {
     event.stopPropagation();
+    this.store.dispatch(UIActions.toggleConfirmDeleteOff());
   }
 
   onCompleteSubtask(taskTitle: string, subtaskTitle: string) {
@@ -43,6 +51,21 @@ export class ModalComponent {
 
     if (taskStatus !== task.status) {
       this.store.dispatch(changeTaskStatus({ taskStatus, task }));
+      // this.store.dispatch(UIActions.toggleModal());
     }
+  }
+  toggleConfirmDeleteModal(event: MouseEvent) {
+    event.stopPropagation();
+    this.store.dispatch(UIActions.toggleConfirmDeleteOn());
+  }
+  onEditTask(event: MouseEvent) {
+    event.stopPropagation();
+    this.store.dispatch(UIActions.toggleEditTaskModalOn());
+  }
+  onDeleteTask(event: MouseEvent, title: string) {
+    event.stopPropagation();
+    this.store.dispatch(BoardActions.deleteTask({ title }));
+    this.store.dispatch(UIActions.toggleConfirmDeleteOff());
+    this.store.dispatch(UIActions.toggleModal());
   }
 }

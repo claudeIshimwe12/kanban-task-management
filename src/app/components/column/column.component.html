@@ -5,8 +5,11 @@
   [cdkDropListConnectedTo]="connectedColumns"
   (cdkDropListDropped)="drop($event)"
 >
-  <div class="flex items-center gap-4">
-    <div class="h-4 w-4 rounded-full bg-grey-primary"></div>
+  <div class="flex items-center gap-4 mt-8">
+    <div
+      class="h-4 w-4 rounded-full"
+      [ngStyle]="{ 'background-color': color }"
+    ></div>
     <h1 class="text-grey-primary font-bold">
       {{ column.name }} ({{ column.tasks.length }})
     </h1>

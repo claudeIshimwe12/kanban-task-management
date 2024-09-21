@@ -15,3 +15,15 @@ export const selectModalToggler = createSelector(
   selectUIState,
   (state) => state.showModal,
 );
+export const selectConfirmDeleteToggler = createSelector(
+  selectUIState,
+  (state) => state.toggleConfirmDeleteTask,
+);
+export const selectToggleEditModal = createSelector(
+  selectUIState,
+  (state) => state.toggleEditTaskModal,
+);
+export const selectIsConfirmDeleteModalOpen = createSelector(
+  selectUIState,
+  (state) => state.isConfirmDeleteModalOpen,
+);
