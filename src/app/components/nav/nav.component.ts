@@ -18,4 +18,7 @@ export class NavComponent {
   toggleSideBar() {
     this.store.dispatch(UIActions.toggleSideBar());
   }
+  toggleAddNewTask() {
+    this.store.dispatch(UIActions.toggleAddTaskModalOn());
+  }
 }

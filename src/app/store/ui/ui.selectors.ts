@@ -27,3 +27,7 @@ export const selectIsConfirmDeleteModalOpen = createSelector(
   selectUIState,
   (state) => state.isConfirmDeleteModalOpen,
 );
+export const selectToggleAddNewTaskModal = createSelector(
+  selectUIState,
+  (state) => state.toggleAddTaskModal,
+);

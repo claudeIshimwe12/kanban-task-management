@@ -7,6 +7,7 @@ export const initialState: UIState = {
   toggleConfirmDeleteTask: false,
   isConfirmDeleteModalOpen: false,
   toggleEditTaskModal: false,
+  toggleAddTaskModal: false,
 };
 
 export const UIReducer = createReducer(
@@ -50,5 +51,13 @@ export const UIReducer = createReducer(
   on(UIActions.toggleConfirmDeleteModal, (state) => ({
     ...state,
     isConfirmDeleteModalOpen: !state.isConfirmDeleteModalOpen,
+  })),
+  on(UIActions.toggleAddTaskModalOn, (state) => ({
+    ...state,
+    toggleAddTaskModal: true,
+  })),
+  on(UIActions.toggleAddTaskModalOff, (state) => ({
+    ...state,
+    toggleAddTaskModal: false,
   })),
 );

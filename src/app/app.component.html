@@ -10,6 +10,9 @@
 <app-main></app-main>
 <button (click)="toggleModal()">Open Edit Modal</button>
 @if (toggleEditTaskModal$ | async) {
-  <app-edit-task></app-edit-task>
+  <app-edit-task [type]="'edit'"></app-edit-task>
+}
+@if (toggleAddTaskModal$ | async) {
+  <app-edit-task [type]="'add'"></app-edit-task>
 }
 <!-- <app-confirm-delete-modal></app-confirm-delete-modal> -->

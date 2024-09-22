@@ -48,3 +48,7 @@ export const deleteTask = createAction(
   "[Edit Task Component] Delete Task",
   props<{ title: string }>(),
 );
+export const addNewTask = createAction(
+  "[Edit Task Component] Add New Task",
+  props<{ task: Task }>(),
+);

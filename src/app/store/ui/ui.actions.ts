@@ -17,3 +17,9 @@ export const toggleEditTaskModalOff = createAction(
 export const toggleConfirmDeleteModal = createAction(
   "[Column Component] Toggle Confirm Delete Modal",
 );
+export const toggleAddTaskModalOn = createAction(
+  "[Nav Component] Toggle Add New Task Modal On",
+);
+export const toggleAddTaskModalOff = createAction(
+  "[Nav Component] Toggle Add New Task Modal Off",
+);
