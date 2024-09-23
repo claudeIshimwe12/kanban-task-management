@@ -1,14 +1,36 @@
-# ApiMasteryLab
+# Kanban Project Management
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.6.
+This is a **Kanban Project Management Tool** built using **Angular**, styled with **Sass** and **TailwindCSS**, and powered by **NgRx** for state management. It supports creating, editing, and managing tasks within a responsive and customizable board interface.
 
-## Development server
+## Live Demo
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+You can preview this project by visiting the following link: [Demo](https://famous-taffy-4d0812.netlify.app/)
 
-## Code scaffolding
+## Features
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- **Task Management**: Create, edit, delete, and organize tasks across multiple columns like "To Do," "In Progress," and "Done."
+- **Drag-and-Drop Support**: Easily drag and drop tasks between columns.
+- **Board Customization**: Create, edit, or delete boards with customizable columns.
+- **State Management**: Efficient state handling powered by **NgRx** for scalable and maintainable state flow.
+- **Responsive UI**: Designed with **TailwindCSS** and **Sass** to look great on both desktop and mobile devices.
+- **Unit Testing**: Comprehensive unit tests written with **Jest** to ensure the reliability of components and services.
+
+## Development Server
+
+To run the development server:
+
+1. Run `ng serve` in the terminal.
+2. Navigate to `http://localhost:4200/` in your browser.
+3. The application will automatically reload when you make changes to the source files.
+
+## Code Scaffolding
+
+You can generate new Angular components, services, modules, and more by running:
+
+```bash
+ng generate component component-name
+ng generate directive|pipe|service|class|guard|interface|enum|module
+```
 
 ## Build
 
