@@ -4,32 +4,54 @@
     'md:max-w-[83.33%]': toggleSideBar$ | async,
   }"
 >
-  <div
-    *ngIf="activeBoard$ | async as board"
-    class="flex gap-4"
-    cdkDropListGroup
-  >
-    <!-- Loop through columns -->
-    <app-column
-      *ngFor="let column of board.columns; let i = index"
-      [column]="column"
-      [connectedColumns]="getConnectedLists(board)"
-      (dropTask)="drop($event, board)"
-    ></app-column>
-
-    @if (toggleModal$ | async) {
-      <app-modal></app-modal>
-    }
+  <div *ngIf="activeBoard$ | async as board">
     <div
-      class="cursor-pointer m-8 min-w-[280px] h-[560px] bg-grey-primary dark:bg-dark-grey-primary rounded-md flex justify-center items-center"
-      (click)="toggleAddColumn()"
+      *ngIf="board.columns.length > 0; else Empty"
+      class="flex gap-4"
+      cdkDropListGroup
     >
-      <div class="flex gap-2">
-        <img src="assets/images/icon-plus.svg" alt="plus icon-plus" />
-        <h1 class="dark:text-grey-primary text-black-hover font-bold">
-          New Column
-        </h1>
+      <!-- Loop through columns -->
+      <app-column
+        *ngFor="let column of board.columns; let i = index"
+        [column]="column"
+        [connectedColumns]="getConnectedLists(board)"
+        (dropTask)="drop($event, board)"
+      ></app-column>
+
+      @if (toggleModal$ | async) {
+        <app-modal></app-modal>
+      }
+      <div
+        class="cursor-pointer m-8 min-w-[280px] h-[560px] bg-grey-primary dark:bg-dark-grey-primary rounded-md flex justify-center items-center"
+        (click)="toggleAddColumn()"
+      >
+        <div class="flex gap-2">
+          <img src="assets/images/icon-plus.svg" alt="plus icon-plus" />
+          <h1 class="dark:text-grey-primary text-black-hover font-bold">
+            New Column
+          </h1>
+        </div>
       </div>
     </div>
+    <ng-template #Empty>
+      <div class="flex justify-center items-center mt-48">
+        <div>
+          <h1 class="text-grey-primary text-l">
+            This board is empty. Create a new column to get started.
+          </h1>
+
+          <div class="w-1/2 mx-auto mt-8">
+            <div
+              class="flex gap-2 bg-purple-primary hover:bg-purple-hover rounded-lg justify-center items-center py-2 px-4"
+            >
+              <img src="assets/images/icon-plus.svg" alt="plus icon-plus" />
+              <h1 class="dark:text-grey-primary text-black-hover font-bold">
+                New Column
+              </h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
   </div>
 </section>

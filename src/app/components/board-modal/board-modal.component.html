@@ -6,11 +6,11 @@
     <form
       [formGroup]="boardForm"
       (click)="onFormClick($event)"
-      class="w-1/3 flex custom-form-height dark:bg-black-hover bg-white-primary h-full overflow-y-scroll flex-col gap-2 p-8 rounded-md hide-scroll-bar"
+      class="lg:w-1/3 md:w-1/2 w-10/12 flex custom-form-height dark:bg-black-hover bg-white-primary h-full overflow-y-scroll flex-col gap-2 p-8 rounded-md hide-scroll-bar"
     >
       <h2 class="font-bold text-xl text-black-primary dark:text-white-primary">
         {{ type.at(0)?.toUpperCase()?.concat(type.slice(1, type.length)) }}
-        Board {{ type }}
+        Board
       </h2>
 
       <!-- Title Input Field -->
@@ -22,7 +22,7 @@
           type="text"
           id="title"
           formControlName="name"
-          placeholder="Task Title"
+          placeholder="Board Title"
           class="w-full px-4 p-3 rounded-lg border dark:bg-black-hover border-grey-primary dark:border-grey-primary font-medium dark:text-white-primary outline-none"
         />
         <div
@@ -55,12 +55,12 @@
                 <input
                   type="text"
                   [formControlName]="i"
-                  placeholder="e.g. Web Design"
+                  placeholder="e.g. To Do"
                   class="px-4 p-3 h-full text-l font-medium outline-none rounded-lg dark:bg-black-hover dark:text-white-primary"
                 />
                 <!-- Error Message for Subtask -->
                 <span
-                  class="mt-1 text-red-primary text-l"
+                  class="mt-1 text-red-primary text-s md:text-l"
                   *ngIf="
                     columns.at(i)?.invalid &&
                     (columns.at(i)?.dirty || columns.at(i)?.touched)
