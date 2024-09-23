@@ -8,7 +8,6 @@
   <img src="assets/images/icon-show-sidebar.svg" alt="icon-show-sidebar" />
 </div>
 <app-main></app-main>
-<button (click)="toggleModal()">Open Edit Modal</button>
 @if (toggleEditTaskModal$ | async) {
   <app-edit-task [type]="'edit'"></app-edit-task>
 }
@@ -21,4 +20,7 @@
 @if (toggleEditBoardModal$ | async) {
   <app-board-modal type="edit"></app-board-modal>
 }
-<!-- <app-confirm-delete-modal></app-confirm-delete-modal> -->
+
+@if (toggleDeleteBoardConfirmation$ | async) {
+  <app-confirm-delete-modal></app-confirm-delete-modal>
+}

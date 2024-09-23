@@ -25,4 +25,8 @@ export class NavComponent {
   toggleAddNewTask() {
     this.store.dispatch(UIActions.toggleAddTaskModalOn());
   }
+  toggleConfirmDeleteModal(event: MouseEvent) {
+    event.stopPropagation();
+    this.store.dispatch(UIActions.toggleConfirmDeleteOn());
+  }
 }

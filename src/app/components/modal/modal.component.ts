@@ -25,6 +25,7 @@ export class ModalComponent {
   task$!: Observable<Task>;
   activeBoard$!: Observable<Board>;
   toggleConfirmDelete$!: Observable<boolean>;
+  isModalOpen = false;
   constructor(private store: Store<AppState>) {
     this.task$ = this.store.pipe(select(selectActiveTask));
     this.activeBoard$ = this.store.pipe(select(selectActiveBoard));
@@ -39,7 +40,7 @@ export class ModalComponent {
   }
   onClick(event: MouseEvent) {
     event.stopPropagation();
-    this.store.dispatch(UIActions.toggleConfirmDeleteOff());
+    this.isModalOpen = false;
   }
 
   onCompleteSubtask(taskTitle: string, subtaskTitle: string) {
@@ -56,7 +57,8 @@ export class ModalComponent {
   }
   toggleConfirmDeleteModal(event: MouseEvent) {
     event.stopPropagation();
-    this.store.dispatch(UIActions.toggleConfirmDeleteOn());
+    // this.store.dispatch(UIActions.toggleConfirmDeleteOn());
+    this.isModalOpen = !this.isModalOpen;
   }
   onEditTask(event: MouseEvent) {
     event.stopPropagation();

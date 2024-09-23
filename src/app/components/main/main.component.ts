@@ -4,6 +4,8 @@ import { select, Store } from "@ngrx/store";
 import { Observable } from "rxjs";
 import { Board } from "../../models/data/board.interface";
 import {
+  selectConfirmDeleteToggler,
+  selectConfirmModifyBoard,
   selectModalToggler,
   selectSideBarToggler,
 } from "../../store/ui/ui.selectors";
@@ -27,6 +29,8 @@ export class MainComponent {
   activeBoard$: Observable<Board>;
   toggleModal$!: Observable<boolean>;
   isLoading$: Observable<boolean>;
+  confirmModifyTask$!: Observable<boolean>;
+  confirmModyBoard$!: Observable<boolean>;
 
   constructor(private store: Store<AppState>) {
     this.toggleSideBar$ = this.store.pipe(select(selectSideBarToggler));
@@ -34,6 +38,10 @@ export class MainComponent {
     this.activeBoard$ = this.store.pipe(select(selectActiveBoard));
     this.toggleModal$ = this.store.pipe(select(selectModalToggler));
     this.isLoading$ = this.store.pipe(select(selectLoader));
+    this.confirmModifyTask$ = this.store.pipe(
+      select(selectConfirmDeleteToggler),
+    );
+    this.confirmModyBoard$ = this.store.pipe(select(selectConfirmModifyBoard));
   }
 
   drop(event: CdkDragDrop<Task[]>, board: Board) {
@@ -61,5 +69,19 @@ export class MainComponent {
   }
   toggleAddColumn() {
     this.store.dispatch(UIActions.toggleEditBoardOn());
+  }
+  closeConfirmModal(event: MouseEvent) {
+    event.stopPropagation();
+
+    this.store.dispatch(UIActions.toggleConfirmDeleteOff());
+  }
+  onModalClick(event: MouseEvent) {
+    event.stopPropagation();
+  }
+  onEditBoard() {
+    this.toggleAddColumn();
+  }
+  onDeleteBoard() {
+    this.store.dispatch(UIActions.toggleModifyBoardOn());
   }
 }

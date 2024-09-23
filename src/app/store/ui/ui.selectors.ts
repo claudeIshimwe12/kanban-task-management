@@ -1,7 +1,4 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
-// import { AppState } from "../../models/app-state.interface";
-// import { UIState } from "../../models/ui-state.interface";
-// import { AppState } from "../../models/state/app.state.interface";
 import { UIState } from "../../models/state/ui.state.interface";
 import { AppState } from "../../models/state/app.state.interface";
 
@@ -38,4 +35,9 @@ export const selectToggleAddBoardModal = createSelector(
 export const selectToggleEditBoardModal = createSelector(
   selectUIState,
   (state) => state.toggleEditBoardModal,
+);
+
+export const selectConfirmModifyBoard = createSelector(
+  selectUIState,
+  (state) => state.openDeleteBoardModal,
 );

@@ -60,3 +60,6 @@ export const editBoard = createAction(
   "[Main Component] Edit Board",
   props<{ board: Board }>(),
 );
+export const deleteBoard = createAction(
+  "[Delete Board Component] Delete Board",
+);
