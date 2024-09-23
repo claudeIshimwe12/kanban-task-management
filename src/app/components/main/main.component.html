@@ -22,7 +22,7 @@
         <app-modal></app-modal>
       }
       <div
-        class="cursor-pointer m-8 min-w-[280px] h-[560px] bg-grey-primary dark:bg-dark-grey-primary rounded-md flex justify-center items-center"
+        class="cursor-pointer m-8 min-w-[280px] h-[560px] bg-white-hover dark:bg-dark-grey-primary rounded-md flex justify-center items-center mt-16"
         (click)="toggleAddColumn()"
       >
         <div class="flex gap-2">
@@ -34,24 +34,32 @@
       </div>
     </div>
     <ng-template #Empty>
-      <div class="flex justify-center items-center mt-48">
-        <div>
-          <h1 class="text-grey-primary text-l">
-            This board is empty. Create a new column to get started.
-          </h1>
+      <div
+        *ngIf="isLoading$ | async; else Warn"
+        class="w-full h-full flex items-center justify-center lg:mt-56 mt-36"
+      >
+        <div class="loader"></div>
+      </div>
+      <ng-template #Warn>
+        <div class="flex justify-center items-center mt-48">
+          <div>
+            <h1 class="text-grey-primary text-l">
+              This board is empty. Create a new column to get started.
+            </h1>
 
-          <div class="w-1/2 mx-auto mt-8">
-            <div
-              class="flex gap-2 bg-purple-primary hover:bg-purple-hover rounded-lg justify-center items-center py-2 px-4"
-            >
-              <img src="assets/images/icon-plus.svg" alt="plus icon-plus" />
-              <h1 class="dark:text-grey-primary text-black-hover font-bold">
-                New Column
-              </h1>
+            <div class="w-1/2 mx-auto mt-8">
+              <div
+                class="flex gap-2 bg-purple-primary hover:bg-purple-hover rounded-lg justify-center items-center py-2 px-4"
+              >
+                <img src="assets/images/icon-plus.svg" alt="plus icon-plus" />
+                <h1 class="dark:text-grey-primary text-black-hover font-bold">
+                  New Column
+                </h1>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </ng-template>
     </ng-template>
   </div>
 </section>
