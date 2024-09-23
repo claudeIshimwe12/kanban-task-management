@@ -1,4 +1,7 @@
-<section class="fixed top-0 w-full z-10">
+<section
+  class="fixed top-0 w-full z-10"
+  *ngIf="activeBoard$ | async as activeBoard"
+>
   <div
     class="flex justify-between w-full bg-white-primary border-b-2 border-b-white-hover dark:border-b-dark-grey-hover dark:bg-dark-grey-primary"
   >
@@ -23,7 +26,7 @@
         <h1
           class="text-[13px] sm:text-[20px] lg:text-xl font-bold dark:text-white-primary"
         >
-          Platform Launch
+          {{ activeBoard.name }}
         </h1>
         <!--  Drop down-->
         @if (toggleSideBar$ | async) {

@@ -5,7 +5,7 @@
 }
 
 .pop-up {
-  transition: all 0.6s ease-in-out;
+  transition: all 0s ease-in-out;
   transform: translate(-1600px);
 }
 
@@ -20,6 +20,7 @@
   }
 
   .pop-up-colapsed {
+    transition: all 0.6s ease-in-out;
     transform: translateY(0px);
   }
 }
