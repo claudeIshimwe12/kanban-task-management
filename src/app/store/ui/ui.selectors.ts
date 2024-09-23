@@ -31,3 +31,11 @@ export const selectToggleAddNewTaskModal = createSelector(
   selectUIState,
   (state) => state.toggleAddTaskModal,
 );
+export const selectToggleAddBoardModal = createSelector(
+  selectUIState,
+  (state) => state.toggleAddBoardModal,
+);
+export const selectToggleEditBoardModal = createSelector(
+  selectUIState,
+  (state) => state.toggleEditBoardModal,
+);

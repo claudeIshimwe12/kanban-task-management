@@ -8,6 +8,8 @@ export const initialState: UIState = {
   isConfirmDeleteModalOpen: false,
   toggleEditTaskModal: false,
   toggleAddTaskModal: false,
+  toggleAddBoardModal: false,
+  toggleEditBoardModal: false,
 };
 
 export const UIReducer = createReducer(
@@ -59,5 +61,21 @@ export const UIReducer = createReducer(
   on(UIActions.toggleAddTaskModalOff, (state) => ({
     ...state,
     toggleAddTaskModal: false,
+  })),
+  on(UIActions.toggleAddNewBoardOn, (state) => ({
+    ...state,
+    toggleAddBoardModal: true,
+  })),
+  on(UIActions.toggleAddNewBoardOff, (state) => ({
+    ...state,
+    toggleAddBoardModal: false,
+  })),
+  on(UIActions.toggleEditBoardOn, (state) => ({
+    ...state,
+    toggleEditBoardModal: true,
+  })),
+  on(UIActions.toggleEditBoardOff, (state) => ({
+    ...state,
+    toggleEditBoardModal: false,
   })),
 );

@@ -15,4 +15,10 @@
 @if (toggleAddTaskModal$ | async) {
   <app-edit-task [type]="'add'"></app-edit-task>
 }
+@if (toggleBoardModal$ | async) {
+  <app-board-modal type="add"></app-board-modal>
+}
+@if (toggleEditBoardModal$ | async) {
+  <app-board-modal type="edit"></app-board-modal>
+}
 <!-- <app-confirm-delete-modal></app-confirm-delete-modal> -->

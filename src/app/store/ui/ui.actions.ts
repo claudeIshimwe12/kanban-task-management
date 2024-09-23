@@ -23,3 +23,15 @@ export const toggleAddTaskModalOn = createAction(
 export const toggleAddTaskModalOff = createAction(
   "[Nav Component] Toggle Add New Task Modal Off",
 );
+export const toggleAddNewBoardOn = createAction(
+  "[SideBar Component] Toggle Add New Board Modal On",
+);
+export const toggleAddNewBoardOff = createAction(
+  "[SideBar Component] Toggle Add New Board Modal Off",
+);
+export const toggleEditBoardOn = createAction(
+  "[Main Component] Toggle Edit Board Modal On",
+);
+export const toggleEditBoardOff = createAction(
+  "[Main Component] Toggle Edit Board Modal Off",
+);

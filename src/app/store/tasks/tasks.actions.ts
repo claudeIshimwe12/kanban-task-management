@@ -52,3 +52,11 @@ export const addNewTask = createAction(
   "[Edit Task Component] Add New Task",
   props<{ task: Task }>(),
 );
+export const createBoard = createAction(
+  "[Board Modal Component] Create Board",
+  props<{ board: Board }>(),
+);
+export const editBoard = createAction(
+  "[Main Component] Edit Board",
+  props<{ board: Board }>(),
+);

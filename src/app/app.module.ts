@@ -24,6 +24,7 @@ import { FilterTasksPipe } from "./pipes/filter.pipe";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { EditTaskComponent } from "./components/edit-task/edit-task.component";
 import { ConfirmDeleteModalComponent } from "./components/confirm-delete-modal/confirm-delete-modal.component";
+import { BoardModalComponent } from "./components/board-modal/board-modal.component";
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,6 +37,7 @@ import { ConfirmDeleteModalComponent } from "./components/confirm-delete-modal/c
     FilterTasksPipe,
     EditTaskComponent,
     ConfirmDeleteModalComponent,
+    BoardModalComponent,
   ],
   imports: [
     BrowserModule,

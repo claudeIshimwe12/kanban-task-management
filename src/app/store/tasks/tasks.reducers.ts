@@ -336,4 +336,61 @@ export const boardsReducer = createReducer(
       activeTask: task,
     };
   }),
+  on(BoardActions.createBoard, (state, { board }) => {
+    const updatedBoards = [...state.boards, board];
+
+    return {
+      ...state,
+      boards: updatedBoards,
+      activeBoard: board,
+    };
+  }),
+  on(BoardActions.editBoard, (state, { board }) => {
+    const updatedBoards = state.boards.map((existingBoard) => {
+      if (existingBoard.name !== board.name) {
+        return existingBoard;
+      }
+      const updatedColumns = board.columns.map((newColumn) => {
+        const existingColumn = existingBoard.columns.find(
+          (col) => col.name === newColumn.name,
+        );
+
+        if (existingColumn) {
+          return {
+            ...newColumn,
+            tasks: existingColumn.tasks,
+          };
+        }
+
+        return newColumn;
+      });
+
+      const finalColumns = updatedColumns.filter((newColumn) =>
+        board.columns.some((col) => col.name === newColumn.name),
+      );
+
+      return {
+        ...existingBoard,
+        name: board.name,
+        columns: finalColumns,
+      };
+    });
+
+    const updatedActiveBoard =
+      state.activeBoard.name === board.name
+        ? {
+            ...state.activeBoard,
+            name: board.name,
+            columns:
+              updatedBoards.find((b) => b.name === board.name)?.columns ||
+              state.activeBoard.columns,
+          }
+        : state.activeBoard;
+
+    return {
+      ...state,
+      boards: updatedBoards,
+      activeBoard: updatedActiveBoard,
+    };
+  }),
 );
