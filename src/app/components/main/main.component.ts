@@ -26,12 +26,14 @@ export class MainComponent {
   isLoading!: Observable<boolean>;
   activeBoard$: Observable<Board>;
   toggleModal$!: Observable<boolean>;
+  isLoading$: Observable<boolean>;
 
   constructor(private store: Store<AppState>) {
     this.toggleSideBar$ = this.store.pipe(select(selectSideBarToggler));
     this.isLoading = this.store.pipe(select(selectLoader));
     this.activeBoard$ = this.store.pipe(select(selectActiveBoard));
     this.toggleModal$ = this.store.pipe(select(selectModalToggler));
+    this.isLoading$ = this.store.pipe(select(selectLoader));
   }
 
   drop(event: CdkDragDrop<Task[]>, board: Board) {
