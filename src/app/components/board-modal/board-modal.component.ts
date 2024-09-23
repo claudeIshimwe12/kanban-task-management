@@ -92,13 +92,12 @@ export class BoardModalComponent implements OnInit {
 
     if (this.type === "edit") {
       this.store.dispatch(BoardActions.editBoard({ board }));
+      this.store.dispatch(UIActions.toggleEditBoardOff());
     } else if (this.type === "add") {
       this.store.dispatch(BoardActions.createBoard({ board }));
-      // this.store.dispatch(BoardActions.addNewTask({ task }));
-      // this.store.dispatch(UIActions.toggleAddTaskModalOff());
+
+      this.store.dispatch(UIActions.toggleAddNewBoardOff());
     }
-    // this.store.dispatch(UIActions.toggleEditTaskModalOff());
-    // this.store.dispatch(UIActions.toggleConfirmDeleteOff());
 
     this.boardForm.reset();
   }
