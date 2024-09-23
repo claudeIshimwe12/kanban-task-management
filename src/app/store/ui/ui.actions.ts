@@ -35,3 +35,9 @@ export const toggleEditBoardOn = createAction(
 export const toggleEditBoardOff = createAction(
   "[Main Component] Toggle Edit Board Modal Off",
 );
+export const toggleModifyBoardOn = createAction(
+  "[Main Component] Open Modify Board On",
+);
+export const toggleModifyBoardOff = createAction(
+  "[Main Component] Open Modify Board Off",
+);

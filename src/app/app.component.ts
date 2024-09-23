@@ -6,6 +6,7 @@ import * as UIActions from "../app/store/ui/ui.actions";
 import * as BoardActions from "../app/store/tasks/tasks.actions";
 import { Observable } from "rxjs";
 import {
+  selectConfirmModifyBoard,
   selectModalToggler,
   selectToggleAddBoardModal,
   selectToggleAddNewTaskModal,
@@ -24,16 +25,13 @@ export class AppComponent implements OnInit {
   toggleAddTaskModal$!: Observable<boolean>;
   toggleBoardModal$!: Observable<boolean>;
   toggleEditBoardModal$!: Observable<boolean>;
+  toggleDeleteBoardConfirmation$!: Observable<boolean>;
   constructor(
     @Inject(PLATFORM_ID) private platformId: object,
     private store: Store<AppState>,
   ) {}
 
   isModalOpen = false;
-
-  toggleModal() {
-    this.isModalOpen = !this.isModalOpen;
-  }
 
   ngOnInit(): void {
     this.store.dispatch(BoardActions.loadBoards());
@@ -45,6 +43,9 @@ export class AppComponent implements OnInit {
     this.toggleBoardModal$ = this.store.pipe(select(selectToggleAddBoardModal));
     this.toggleEditBoardModal$ = this.store.pipe(
       select(selectToggleEditBoardModal),
+    );
+    this.toggleDeleteBoardConfirmation$ = this.store.pipe(
+      select(selectConfirmModifyBoard),
     );
     if (isPlatformBrowser(this.platformId)) {
       const body = document.querySelector("body");
@@ -86,7 +87,6 @@ export class AppComponent implements OnInit {
   }
 
   toggleSideBar() {
-    this.toggleModal();
     this.store.dispatch(UIActions.toggleSideBar());
   }
 }

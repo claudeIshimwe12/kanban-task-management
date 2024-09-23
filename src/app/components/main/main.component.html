@@ -3,6 +3,7 @@
   [ngClass]="{
     'md:max-w-[83.33%]': toggleSideBar$ | async,
   }"
+  (click)="closeConfirmModal($event)"
 >
   <div *ngIf="activeBoard$ | async as board">
     <div
@@ -61,5 +62,24 @@
         </div>
       </ng-template>
     </ng-template>
+    @if (confirmModifyTask$ | async) {
+      <div
+        class="fixed top-24 right-8 bg-white-primary dark:bg-dark-grey-primary p-4 rounded-md shadow-md"
+        (click)="onModalClick($event)"
+      >
+        <h1
+          class="text-l text-grey-primary hover:text-grey-hover cursor-pointer"
+          (click)="onEditBoard()"
+        >
+          Edit Board
+        </h1>
+        <h1
+          class="text-l text-red-primary hover:text-red-hover mt-2 cursor-pointer"
+          (click)="onDeleteBoard()"
+        >
+          Delete Board
+        </h1>
+      </div>
+    }
   </div>
 </section>

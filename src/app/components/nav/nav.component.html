@@ -3,7 +3,7 @@
   *ngIf="activeBoard$ | async as activeBoard"
 >
   <div
-    class="flex justify-between w-full bg-white-primary border-b-2 border-b-white-hover dark:border-b-dark-grey-hover dark:bg-dark-grey-primary"
+    class="flex justify-between relative w-full bg-white-primary border-b-2 border-b-white-hover dark:border-b-dark-grey-hover dark:bg-dark-grey-primary"
   >
     <div class="flex items-center">
       <div class="hidden sm:block py-2 sm:py-4 px-0 sm:px-8 dark:hidden">
@@ -56,7 +56,10 @@
         </div>
         <h2 class="text-white-primary hidden sm:block text-m">Add New Task</h2>
       </div>
-      <div class="p-1">
+      <div
+        class="p-1 cursor-pointer"
+        (click)="toggleConfirmDeleteModal($event)"
+      >
         <img
           src="assets/images/icon-vertical-ellipsis.svg"
           alt="icon-vertical-ellipsis"

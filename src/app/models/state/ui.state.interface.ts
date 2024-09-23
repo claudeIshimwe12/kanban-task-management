@@ -7,4 +7,5 @@ export interface UIState {
   toggleAddTaskModal: boolean;
   toggleAddBoardModal: boolean;
   toggleEditBoardModal: boolean;
+  openDeleteBoardModal: boolean;
 }

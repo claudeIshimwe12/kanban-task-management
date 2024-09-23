@@ -393,4 +393,15 @@ export const boardsReducer = createReducer(
       activeBoard: updatedActiveBoard,
     };
   }),
+  on(BoardActions.deleteBoard, (state) => {
+    const updatedBoards = state.boards.filter(
+      (board) => board.name !== state.activeBoard.name,
+    );
+
+    return {
+      ...state,
+      boards: updatedBoards,
+      activeBoard: state.boards[1],
+    };
+  }),
 );
