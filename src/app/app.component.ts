@@ -7,6 +7,9 @@ import * as BoardActions from "../app/store/tasks/tasks.actions";
 import { Observable } from "rxjs";
 import {
   selectModalToggler,
+  selectToggleAddBoardModal,
+  selectToggleAddNewTaskModal,
+  selectToggleEditBoardModal,
   selectToggleEditModal,
 } from "./store/ui/ui.selectors";
 
@@ -18,6 +21,9 @@ import {
 export class AppComponent implements OnInit {
   toggleModal$!: Observable<boolean>;
   toggleEditTaskModal$!: Observable<boolean>;
+  toggleAddTaskModal$!: Observable<boolean>;
+  toggleBoardModal$!: Observable<boolean>;
+  toggleEditBoardModal$!: Observable<boolean>;
   constructor(
     @Inject(PLATFORM_ID) private platformId: object,
     private store: Store<AppState>,
@@ -32,7 +38,14 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.store.dispatch(BoardActions.loadBoards());
     this.toggleModal$ = this.store.pipe(select(selectModalToggler));
+    this.toggleAddTaskModal$ = this.store.pipe(
+      select(selectToggleAddNewTaskModal),
+    );
     this.toggleEditTaskModal$ = this.store.pipe(select(selectToggleEditModal));
+    this.toggleBoardModal$ = this.store.pipe(select(selectToggleAddBoardModal));
+    this.toggleEditBoardModal$ = this.store.pipe(
+      select(selectToggleEditBoardModal),
+    );
     if (isPlatformBrowser(this.platformId)) {
       const body = document.querySelector("body");
 

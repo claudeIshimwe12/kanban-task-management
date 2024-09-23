@@ -25,7 +25,10 @@
         }
       </div>
       <!-- Create a new board-->
-      <div class="flex justify-start gap-4 w-full py-4 px-4 rounded-r-3xl">
+      <div
+        class="flex justify-start gap-4 w-full py-4 px-4 rounded-r-3xl cursor-pointer"
+        (click)="onCreateNewBoard()"
+      >
         <img src="assets/images/icon-board-new.svg" alt="icon-board" />
         <div class="flex items-center gap-2">
           <img src="assets/images/icon-plus.svg" alt="add icon" class="pt-1" />

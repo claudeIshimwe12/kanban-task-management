@@ -53,4 +53,7 @@ export class SideBarComponent implements OnInit {
   toggleSideBar() {
     this.store.dispatch(UIActions.toggleSideBar());
   }
+  onCreateNewBoard() {
+    this.store.dispatch(UIActions.toggleAddNewBoardOn());
+  }
 }

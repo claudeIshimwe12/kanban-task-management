@@ -24,7 +24,7 @@ export class ColumnComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.color = this.getRandomColor();
+    this.color = this.getRandomColor(this.column.name);
   }
   drop(event: CdkDragDrop<Task[]>) {
     this.dropTask.emit(event);
@@ -36,12 +36,19 @@ export class ColumnComponent implements OnInit {
     this.store.dispatch(BoardActions.clickOnTask({ task }));
   }
 
-  getRandomColor() {
-    const letters = "0123456789ABCDEF";
-    let color = "#";
-    for (let i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
+  getRandomColor(str: string) {
+    let hash = 0;
+
+    for (let i = 0; i < str.length; i++) {
+      hash = str.charCodeAt(i) + ((hash << 5) - hash);
     }
+
+    let color = "#";
+    for (let i = 0; i < 3; i++) {
+      const value = (hash >> (i * 8)) & 0xff;
+      color += ("00" + value.toString(16)).slice(-2);
+    }
+
     return color;
   }
 }

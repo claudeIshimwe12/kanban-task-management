@@ -21,11 +21,14 @@
       <app-modal></app-modal>
     }
     <div
-      class="m-8 min-w-[280px] h-[560px] bg-grey-primary dark:bg-dark-grey-primary rounded-md flex justify-center items-center"
+      class="cursor-pointer m-8 min-w-[280px] h-[560px] bg-grey-primary dark:bg-dark-grey-primary rounded-md flex justify-center items-center"
+      (click)="toggleAddColumn()"
     >
       <div class="flex gap-2">
         <img src="assets/images/icon-plus.svg" alt="plus icon-plus" />
-        <h1 class="text-grey-primary font-bold">New Column</h1>
+        <h1 class="dark:text-grey-primary text-black-hover font-bold">
+          New Column
+        </h1>
       </div>
     </div>
   </div>

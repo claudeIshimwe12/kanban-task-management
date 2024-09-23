@@ -14,6 +14,7 @@ import {
 import { CdkDragDrop } from "@angular/cdk/drag-drop";
 import { moveTask } from "../../store/tasks/tasks.actions";
 import { Task } from "../../models/data/task.interface";
+import * as UIActions from "../../store/ui/ui.actions";
 
 @Component({
   selector: "app-main",
@@ -55,5 +56,8 @@ export class MainComponent {
 
   getConnectedLists(board: Board) {
     return board.columns.map((_, index) => `cdk-drop-list-${index}`);
+  }
+  toggleAddColumn() {
+    this.store.dispatch(UIActions.toggleEditBoardOn());
   }
 }

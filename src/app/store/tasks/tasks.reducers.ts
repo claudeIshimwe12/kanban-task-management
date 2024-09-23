@@ -198,18 +198,32 @@ export const boardsReducer = createReducer(
     const updatedActiveBoard = {
       ...state.activeBoard,
       columns: state.activeBoard.columns.map((column) => {
+        if (
+          column.name === state.activeTask.status &&
+          state.activeTask.status === task.status
+        ) {
+          return {
+            ...column,
+            tasks: column.tasks.map((t) =>
+              t.title === title ? { ...t, ...task } : t,
+            ),
+          };
+        }
+
         if (column.name === state.activeTask.status) {
           return {
             ...column,
             tasks: column.tasks.filter((t) => t.title !== title),
           };
         }
+
         if (column.name === task.status) {
           return {
             ...column,
             tasks: [...column.tasks, { ...task }],
           };
         }
+
         return column;
       }),
     };
@@ -219,18 +233,32 @@ export const boardsReducer = createReducer(
         ? {
             ...board,
             columns: board.columns.map((column) => {
+              if (
+                column.name === state.activeTask.status &&
+                state.activeTask.status === task.status
+              ) {
+                return {
+                  ...column,
+                  tasks: column.tasks.map((t) =>
+                    t.title === title ? { ...t, ...task } : t,
+                  ),
+                };
+              }
+
               if (column.name === state.activeTask.status) {
                 return {
                   ...column,
                   tasks: column.tasks.filter((t) => t.title !== title),
                 };
               }
+
               if (column.name === task.status) {
                 return {
                   ...column,
                   tasks: [...column.tasks, { ...task }],
                 };
               }
+
               return column;
             }),
           }
@@ -244,6 +272,7 @@ export const boardsReducer = createReducer(
       boards: updatedBoards,
     };
   }),
+
   on(BoardActions.deleteTask, (state, { title }) => {
     const updatedActiveBoard = {
       ...state.activeBoard,
@@ -275,6 +304,93 @@ export const boardsReducer = createReducer(
       activeTask: updatedActiveTask,
       activeBoard: updatedActiveBoard,
       boards: updatedBoards,
+    };
+  }),
+  on(BoardActions.addNewTask, (state, { task }) => {
+    const updatedActiveBoard = {
+      ...state.activeBoard,
+      columns: state.activeBoard.columns.map((column) =>
+        column.name === task.status
+          ? { ...column, tasks: [...column.tasks, task] }
+          : column,
+      ),
+    };
+
+    const updatedBoards = state.boards.map((board) =>
+      board.name === state.activeBoard.name
+        ? {
+            ...board,
+            columns: board.columns.map((column) =>
+              column.name === task.status
+                ? { ...column, tasks: [...column.tasks, task] }
+                : column,
+            ),
+          }
+        : board,
+    );
+
+    return {
+      ...state,
+      activeBoard: updatedActiveBoard,
+      boards: updatedBoards,
+      activeTask: task,
+    };
+  }),
+  on(BoardActions.createBoard, (state, { board }) => {
+    const updatedBoards = [...state.boards, board];
+
+    return {
+      ...state,
+      boards: updatedBoards,
+      activeBoard: board,
+    };
+  }),
+  on(BoardActions.editBoard, (state, { board }) => {
+    const updatedBoards = state.boards.map((existingBoard) => {
+      if (existingBoard.name !== board.name) {
+        return existingBoard;
+      }
+      const updatedColumns = board.columns.map((newColumn) => {
+        const existingColumn = existingBoard.columns.find(
+          (col) => col.name === newColumn.name,
+        );
+
+        if (existingColumn) {
+          return {
+            ...newColumn,
+            tasks: existingColumn.tasks,
+          };
+        }
+
+        return newColumn;
+      });
+
+      const finalColumns = updatedColumns.filter((newColumn) =>
+        board.columns.some((col) => col.name === newColumn.name),
+      );
+
+      return {
+        ...existingBoard,
+        name: board.name,
+        columns: finalColumns,
+      };
+    });
+
+    const updatedActiveBoard =
+      state.activeBoard.name === board.name
+        ? {
+            ...state.activeBoard,
+            name: board.name,
+            columns:
+              updatedBoards.find((b) => b.name === board.name)?.columns ||
+              state.activeBoard.columns,
+          }
+        : state.activeBoard;
+
+    return {
+      ...state,
+      boards: updatedBoards,
+      activeBoard: updatedActiveBoard,
     };
   }),
 );

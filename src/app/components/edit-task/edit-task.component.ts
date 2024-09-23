@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { FormArray, FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Board } from "../../models/data/board.interface";
 import { Observable } from "rxjs";
@@ -19,6 +19,7 @@ import * as BoardActions from "../../store/tasks/tasks.actions";
   styleUrls: ["./edit-task.component.scss"],
 })
 export class EditTaskComponent implements OnInit {
+  @Input({ required: true }) type = "";
   taskForm!: FormGroup;
   boards: Board[] = [];
   task$!: Observable<Task>;
@@ -39,19 +40,21 @@ export class EditTaskComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.task$.subscribe((task) => {
-      if (task) {
-        this.task = task;
-        this.patchFormValues(task);
-      }
-    });
+    if (this.type === "edit") {
+      this.task$.subscribe((task) => {
+        if (task) {
+          this.task = task;
+          this.patchFormValues(task);
+        }
+      });
+    }
   }
 
   private createForm() {
     return this.fb.group({
       title: ["", Validators.required],
       description: [""],
-      status: [""],
+      status: ["", Validators.required],
       subtasks: this.fb.array([]),
     });
   }
@@ -98,9 +101,14 @@ export class EditTaskComponent implements OnInit {
       })),
     };
 
-    this.store.dispatch(
-      BoardActions.editTask({ title: this.task.title, task }),
-    );
+    if (this.type === "edit") {
+      this.store.dispatch(
+        BoardActions.editTask({ title: this.task.title, task }),
+      );
+    } else if (this.type === "add") {
+      this.store.dispatch(BoardActions.addNewTask({ task }));
+      this.store.dispatch(UIActions.toggleAddTaskModalOff());
+    }
     this.store.dispatch(UIActions.toggleEditTaskModalOff());
     this.store.dispatch(UIActions.toggleConfirmDeleteOff());
 
@@ -111,6 +119,7 @@ export class EditTaskComponent implements OnInit {
     event.stopPropagation();
     this.store.dispatch(UIActions.toggleEditTaskModalOff());
     this.store.dispatch(UIActions.toggleConfirmDeleteOff());
+    this.store.dispatch(UIActions.toggleAddTaskModalOff());
   }
 
   onFormClick(event: MouseEvent) {

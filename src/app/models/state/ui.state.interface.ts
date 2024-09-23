@@ -4,4 +4,7 @@ export interface UIState {
   toggleConfirmDeleteTask: boolean;
   isConfirmDeleteModalOpen: boolean;
   toggleEditTaskModal: boolean;
+  toggleAddTaskModal: boolean;
+  toggleAddBoardModal: boolean;
+  toggleEditBoardModal: boolean;
 }
