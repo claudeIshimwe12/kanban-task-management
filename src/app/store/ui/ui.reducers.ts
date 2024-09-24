@@ -11,6 +11,7 @@ export const initialState: UIState = {
   toggleAddBoardModal: false,
   toggleEditBoardModal: false,
   openDeleteBoardModal: false,
+  openDeleteTaskModal: false,
 };
 
 export const UIReducer = createReducer(
@@ -86,5 +87,13 @@ export const UIReducer = createReducer(
   on(UIActions.toggleModifyBoardOff, (state) => ({
     ...state,
     openDeleteBoardModal: false,
+  })),
+  on(UIActions.openDeleteTaskModal, (state) => ({
+    ...state,
+    openDeleteTaskModal: true,
+  })),
+  on(UIActions.closeDeleteTaskModal, (state) => ({
+    ...state,
+    openDeleteTaskModal: false,
   })),
 );

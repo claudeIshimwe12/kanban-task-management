@@ -8,4 +8,5 @@ export interface UIState {
   toggleAddBoardModal: boolean;
   toggleEditBoardModal: boolean;
   openDeleteBoardModal: boolean;
+  openDeleteTaskModal: boolean;
 }

@@ -41,3 +41,9 @@ export const toggleModifyBoardOn = createAction(
 export const toggleModifyBoardOff = createAction(
   "[Main Component] Open Modify Board Off",
 );
+export const openDeleteTaskModal = createAction(
+  "[Modal Component] Open Confirm Delete Task Modal",
+);
+export const closeDeleteTaskModal = createAction(
+  "[Board Modal Component] Close Confirm Delete Task Modal",
+);

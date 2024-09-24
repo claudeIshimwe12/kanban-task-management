@@ -1,7 +1,4 @@
-<section
-  class="fixed top-0 w-full z-10"
-  *ngIf="activeBoard$ | async as activeBoard"
->
+<section class="fixed top-0 w-full z-10">
   <div
     class="flex justify-between relative w-full bg-white-primary border-b-2 border-b-white-hover dark:border-b-dark-grey-hover dark:bg-dark-grey-primary"
   >
@@ -23,11 +20,13 @@
       <div
         class="py-4 sm:py-4 px-0 sm:px-8 flex justify-center gap-2 items-center"
       >
-        <h1
-          class="text-[13px] sm:text-[20px] lg:text-xl font-bold dark:text-white-primary"
-        >
-          {{ activeBoard.name }}
-        </h1>
+        <ng-content *ngIf="activeBoard$ | async as activeBoard">
+          <h1
+            class="text-[13px] sm:text-[20px] lg:text-xl font-bold dark:text-white-primary"
+          >
+            {{ activeBoard.name }}
+          </h1>
+        </ng-content>
         <!--  Drop down-->
         @if (toggleSideBar$ | async) {
           <img

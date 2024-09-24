@@ -273,12 +273,12 @@ export const boardsReducer = createReducer(
     };
   }),
 
-  on(BoardActions.deleteTask, (state, { title }) => {
+  on(BoardActions.deleteTask, (state) => {
     const updatedActiveBoard = {
       ...state.activeBoard,
       columns: state.activeBoard.columns.map((column) => ({
         ...column,
-        tasks: column.tasks.filter((t) => t.title !== title),
+        tasks: column.tasks.filter((t) => t.title !== state.activeTask.title),
       })),
     };
 
@@ -288,16 +288,20 @@ export const boardsReducer = createReducer(
             ...board,
             columns: board.columns.map((column) => ({
               ...column,
-              tasks: column.tasks.filter((t) => t.title !== title),
+              tasks: column.tasks.filter(
+                (t) => t.title !== state.activeTask.title,
+              ),
             })),
           }
         : board,
     );
 
-    const updatedActiveTask =
-      state.activeTask.title === title
-        ? { title: "", description: "", status: "", subtasks: [] }
-        : state.activeTask;
+    const updatedActiveTask = {
+      title: "",
+      description: "",
+      status: "",
+      subtasks: [],
+    };
 
     return {
       ...state,
@@ -306,6 +310,7 @@ export const boardsReducer = createReducer(
       boards: updatedBoards,
     };
   }),
+
   on(BoardActions.addNewTask, (state, { task }) => {
     const updatedActiveBoard = {
       ...state.activeBoard,
@@ -337,6 +342,14 @@ export const boardsReducer = createReducer(
     };
   }),
   on(BoardActions.createBoard, (state, { board }) => {
+    const boardExists = state.boards.some(
+      (existingBoard) => existingBoard.name === board.name,
+    );
+
+    if (boardExists) {
+      return state;
+    }
+
     const updatedBoards = [...state.boards, board];
 
     return {
@@ -345,6 +358,7 @@ export const boardsReducer = createReducer(
       activeBoard: board,
     };
   }),
+
   on(BoardActions.editBoard, (state, { board }) => {
     const updatedBoards = state.boards.map((existingBoard) => {
       if (existingBoard.name !== board.name) {

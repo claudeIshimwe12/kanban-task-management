@@ -19,7 +19,10 @@
       </h1>
     </div>
     <div class="w-full pr-8 sm:flex sm:justify-between sm:flex-col">
-      <div *ngIf="boards$ | async as boards">
+      <div
+        *ngIf="boards$ | async as boards"
+        class="max-h-[376px] overflow-y-scroll hide-scroll-bar"
+      >
         @for (board of boards; track $index) {
           <app-board [title]="board.name"></app-board>
         }

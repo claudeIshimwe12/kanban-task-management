@@ -14,7 +14,6 @@ import {
 } from "../../store/tasks/tasks.actions";
 import { Board } from "../../models/data/board.interface";
 import { selectConfirmDeleteToggler } from "../../store/ui/ui.selectors";
-import * as BoardActions from "../../store/tasks/tasks.actions";
 
 @Component({
   selector: "app-modal",
@@ -64,10 +63,9 @@ export class ModalComponent {
     event.stopPropagation();
     this.store.dispatch(UIActions.toggleEditTaskModalOn());
   }
-  onDeleteTask(event: MouseEvent, title: string) {
+  onDeleteTask(event: MouseEvent) {
     event.stopPropagation();
-    this.store.dispatch(BoardActions.deleteTask({ title }));
-    this.store.dispatch(UIActions.toggleConfirmDeleteOff());
+    this.store.dispatch(UIActions.openDeleteTaskModal());
     this.store.dispatch(UIActions.toggleModal());
   }
 }

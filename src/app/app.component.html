@@ -22,5 +22,8 @@
 }
 
 @if (toggleDeleteBoardConfirmation$ | async) {
-  <app-confirm-delete-modal></app-confirm-delete-modal>
+  <app-confirm-delete-modal type="board"></app-confirm-delete-modal>
+}
+@if (confirmDeleteTaskModal$ | async) {
+  <app-confirm-delete-modal type="task"></app-confirm-delete-modal>
 }

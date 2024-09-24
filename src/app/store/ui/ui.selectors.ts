@@ -41,3 +41,7 @@ export const selectConfirmModifyBoard = createSelector(
   selectUIState,
   (state) => state.openDeleteBoardModal,
 );
+export const selectConfirmDeleteTask = createSelector(
+  selectUIState,
+  (state) => state.openDeleteTaskModal,
+);
