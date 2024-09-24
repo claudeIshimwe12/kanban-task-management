@@ -6,6 +6,7 @@ import * as UIActions from "../app/store/ui/ui.actions";
 import * as BoardActions from "../app/store/tasks/tasks.actions";
 import { Observable } from "rxjs";
 import {
+  selectConfirmDeleteTask,
   selectConfirmModifyBoard,
   selectModalToggler,
   selectToggleAddBoardModal,
@@ -26,6 +27,7 @@ export class AppComponent implements OnInit {
   toggleBoardModal$!: Observable<boolean>;
   toggleEditBoardModal$!: Observable<boolean>;
   toggleDeleteBoardConfirmation$!: Observable<boolean>;
+  confirmDeleteTaskModal$!: Observable<boolean>;
   constructor(
     @Inject(PLATFORM_ID) private platformId: object,
     private store: Store<AppState>,
@@ -46,6 +48,9 @@ export class AppComponent implements OnInit {
     );
     this.toggleDeleteBoardConfirmation$ = this.store.pipe(
       select(selectConfirmModifyBoard),
+    );
+    this.confirmDeleteTaskModal$ = this.store.pipe(
+      select(selectConfirmDeleteTask),
     );
     if (isPlatformBrowser(this.platformId)) {
       const body = document.querySelector("body");

@@ -7,17 +7,31 @@
       class="w-1/3 bg-white-primary dark:bg-black-hover p-8 rounded-md z-30"
       (click)="onBlockPropagation($event)"
     >
-      <h1 class="text-red-primary text-xl font-bold">Delete this board?</h1>
+      <h1 class="text-red-primary text-xl font-bold">
+        Delete this {{ type }}?
+      </h1>
       <ng-content *ngIf="activeBoard$ | async as board">
         <p class="text-grey-primary text-lg font-bold my-4">
-          Are you sure you want to delete the ‘{{ board.name }} ’ board? This
-          action will remove all columns and tasks and cannot be reversed.
+          Are you sure you want to delete the ‘
+          @if (type === "board") {
+            <span>{{ board.name }}</span>
+          } @else {
+            <span>{{ task.title }}</span>
+          }
+          ’
+          @if (type === "board") {
+            <span>board</span>
+          } @else {
+            <span>task</span>
+          }
+          ? This action will remove all columns and tasks and cannot be
+          reversed.
         </p>
       </ng-content>
       <div class="w-full flex justify-center items-center gap-4 my-2">
         <button
           class="bg-red-primary py-2 px-8 rounded-lg text-white-primary hover:bg-red-hover"
-          (click)="onDeleteBoard($event)"
+          (click)="onDelete($event)"
         >
           Delete
         </button>
